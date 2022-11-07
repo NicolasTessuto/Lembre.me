@@ -1,22 +1,19 @@
 package com.nicolastessuto.Lembre.me.entities;
 
+import javax.persistence.*;
+import java.sql.Date;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Scanner;
-
+@Entity
+@Table(name = "tb_ServicesProviders")
 public class ServiceProvider {
 
-
-    private double cnpj;
+    private @Id @GeneratedValue(strategy = GenerationType.IDENTITY) Long  id;
+    private long cnpj;
     private String name;
-    private String id;
-    private Date stipulatedPaymentDate;
-    public ArrayList<NotaFiscal> notasFiscais;
+    private java.sql.Date stipulatedPaymentDate;
 
-    Scanner sc = new Scanner(System.in);
 
-    public ServiceProvider(double cnpj, String name, String id, Date stipulatedPaymentDate) {
+    public ServiceProvider(long cnpj, String name, Long id, Date stipulatedPaymentDate) {
         this.cnpj = cnpj;
         this.name = name;
         this.id = id;
@@ -24,13 +21,13 @@ public class ServiceProvider {
     }
 
     public ServiceProvider() {
-    } //Criado um consrutor vazio para que nao seja necessário intanciar a variavel toda nos testes
+    } //empty constructor for tests.
 
     public double getCnpj() {
         return cnpj;
     }
 
-    public void setCnpj(double cnpj) {
+    public void setCnpj(long cnpj) {
         this.cnpj = cnpj;
     }
 
@@ -42,11 +39,11 @@ public class ServiceProvider {
         this.name = name;
     }
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -60,12 +57,12 @@ public class ServiceProvider {
 
     @Override
     public String toString() {
-        return "FORNECEDOR DE SERVICO:[" + id +  "]\n {" +
+        return "FORNECEDOR DE SERVICO:[" + id + "]\n {" +
                 "CNPJ=" + cnpj +
                 ", NOME DO FORNECEDOR='" + name +
                 ", ID='" + id +
                 ", DATA DE PAGAMENTO ESTIPULADA=" + stipulatedPaymentDate +
-                ", notasFiscais=" + notasFiscais +
+                ", notasFiscais=" +
                 '}';
     }
 

@@ -1,67 +1,78 @@
 package com.nicolastessuto.Lembre.me.entities;
 
-import java.util.Date;
+import com.nicolastessuto.Lembre.me.enums.PaymentMethod;
 
+import javax.persistence.*;
+import java.sql.Date;
 
+@Entity
+@Table(name = "tb_Invoices")
 public class Invoice {
 
-    private int numeroNf;
-    private Date emissao;
-    private Date vencimento;
-    private enum<PaymentMethod> formaDePagamento;
-    private boolean paga;
+    private @Id @GeneratedValue(strategy = GenerationType.IDENTITY) Long id;
+    @ManyToOne
+    @JoinColumn(name = "serviceProviderId")
+    private ServiceProvider serviceProviderId;
 
-    public int getNumeroNf() {
-        return numeroNf;
+    private int invoiceNumber;
+    private java.sql.Date issueDate;
+    private java.sql.Date dueDate;
+    private Enum<PaymentMethod> paymentMethod;
+
+    private float price;
+    private boolean payed;
+
+    public ServiceProvider getServiceProviderId() {
+        return serviceProviderId;
     }
 
-    public void setNumeroNf(int numeroNf) {
-        this.numeroNf = numeroNf;
+    public void setServiceProviderId(ServiceProvider serviceProviderId) {
+        this.serviceProviderId = serviceProviderId;
     }
 
-    public Date getEmissao() {
-        return emissao;
+    public Date getIssueDate() {
+        return issueDate;
     }
 
-    public void setEmissao(Date emissao) {
-        this.emissao = emissao;
+    public void setIssueDate(java.sql.Date issueDate) {
+        this.issueDate = issueDate;
     }
 
-    public Date getVencimento() {
-        return vencimento;
+    public Date getDueDate() {
+        return dueDate;
     }
 
-    public void setVencimento(Date vencimento) {
-        this.vencimento = vencimento;
+    public void setDueDate(java.sql.Date dueDate) {
+        this.dueDate = dueDate;
     }
 
-    public Enum<FormasDePagamento> getFormaDePagamento() {
-        return formaDePagamento;
+    public Enum<PaymentMethod> getPaymentMethod() {
+        return paymentMethod;
     }
 
-    public void setFormaDePagamento(Enum<FormasDePagamento> formaDePagamento) {
-        this.formaDePagamento = formaDePagamento;
+    public void setPaymentMethod(Enum<PaymentMethod> formaDePagamento) {
+        this.paymentMethod = formaDePagamento;
     }
 
-    public boolean isPaga() {
-        return paga;
+    public boolean itsPayed() {
+        return payed;
     }
 
-    public void setPaga(boolean paga) {
-        this.paga = paga;
+    public void setPayed(boolean payed) {
+        this.payed = payed;
     }
 
-    public Invoice(int numeroNf, Date emissao, Date vencimento) {
-        this.numeroNf = numeroNf;
-        this.emissao = emissao;
-        this.vencimento = vencimento;
+    public Invoice(ServiceProvider invoiceNumber, java.sql.Date issueDate, java.sql.Date dueDate) {
+        this.serviceProviderId = invoiceNumber;
+        this.issueDate = issueDate;
+        this.dueDate = dueDate;
     }
 
-    public Invoice(int numeroNf, Date emissao, Date vencimento, Enum<FormasDePagamento> formaDePagamento) {
-        this.numeroNf = numeroNf;
-        this.emissao = emissao;
-        this.vencimento = vencimento;
-        this.formaDePagamento = formaDePagamento;
+    public Invoice(ServiceProvider invoiceNumber, java.sql.Date issueDate, java.sql.Date dueDate, Enum<PaymentMethod> formaDePagamento) {
+        this.serviceProviderId = invoiceNumber;
+        this.issueDate = issueDate;
+        this.dueDate = dueDate;
+        this.paymentMethod = formaDePagamento;
     }
 
     public Invoice() { //Construtor vazio para que nao seja preciso instanciar o objeto inteiro
@@ -70,11 +81,11 @@ public class Invoice {
     @Override
     public String toString() {
         return "NotaFiscal{" +
-                "numeroNf=" + numeroNf +
-                ", emissao=" + emissao +
-                ", vencimento=" + vencimento +
-                ", formaDePagamento=" + formaDePagamento +
-                ", paga=" + paga +
+                "numeroNf=" + serviceProviderId +
+                ", emissao=" + issueDate +
+                ", vencimento=" + dueDate +
+                ", formaDePagamento=" + paymentMethod +
+                ", paga=" + payed +
                 '}';
     }
 

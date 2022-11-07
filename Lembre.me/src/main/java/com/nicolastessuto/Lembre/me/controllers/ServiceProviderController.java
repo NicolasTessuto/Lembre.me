@@ -1,7 +1,7 @@
 package com.nicolastessuto.Lembre.me.controllers;
 
 import com.nicolastessuto.Lembre.me.entities.ServiceProvider;
-import com.nicolastessuto.Lembre.me.repositorys.ServiceProviderRepository;
+import com.nicolastessuto.Lembre.me.repositories.ServiceProviderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

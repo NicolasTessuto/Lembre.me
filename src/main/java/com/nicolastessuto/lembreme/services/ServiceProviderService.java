@@ -38,10 +38,14 @@ public class ServiceProviderService {
         serviceProvider.setCnpj(transitionCnpj);
         serviceProvider.setName(serviceProviderDTO.name());
         serviceProvider.setStipulatedPaymentDate(transitionStipulatePaymentDate);
-
         return repository.save(serviceProvider);
         }
     }
+
+
+
+
+
 
 
 

@@ -24,13 +24,6 @@ public class ServiceProviderService {
         return repository.findAll();
     }
 
-    public Optional<ServiceProvider> findServiceProviderByCnpj(Long cnpj){
-        return repository.findByCnpj(cnpj);
-    }
-
-    public Optional<ServiceProvider> findServiceProviderByName(String name){
-        return repository.findByName(name);
-    }
 
     public ServiceProvider addServiceProvider(ServiceProviderDTO serviceProviderDTO){
 

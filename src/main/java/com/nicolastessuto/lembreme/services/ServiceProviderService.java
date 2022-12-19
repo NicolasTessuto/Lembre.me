@@ -20,6 +20,16 @@ public class ServiceProviderService {
     public Optional<ServiceProvider> findServiceProviderById(Long id ){
         return repository.findById(id);
     }
+
+    public Optional<ServiceProvider> findServiceProviderByCnpj(String cnpj ){
+        return repository.findByCnpj(cnpj);
+    }
+
+    public Optional<ServiceProvider> findServiceProviderByName(String name){
+        return repository.findByName(name);
+    }
+
+
     public List<ServiceProvider> findAllServiceProviders(){
         return repository.findAll();
     }
@@ -27,15 +37,13 @@ public class ServiceProviderService {
 
     public ServiceProvider addServiceProvider(ServiceProviderDTO serviceProviderDTO){
 
-        Long transitionCnpj = Long.parseLong(serviceProviderDTO.cnpj());
-
-        if(repository.findByCnpj(transitionCnpj).isPresent()) {
+        if(repository.findByCnpj(serviceProviderDTO.cnpj()).isPresent()) {
             throw new ServiceProviderAlreadyExistsException("Service Provider Already Exists");
         }else{
 
         LocalDate transitionStipulatePaymentDate = LocalDate.parse(serviceProviderDTO.stipulatedPaymentDate());
         ServiceProvider serviceProvider = new ServiceProvider();
-        serviceProvider.setCnpj(transitionCnpj);
+        serviceProvider.setCnpj(serviceProviderDTO.cnpj());
         serviceProvider.setName(serviceProviderDTO.name());
         serviceProvider.setStipulatedPaymentDate(transitionStipulatePaymentDate);
 

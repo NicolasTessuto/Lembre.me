@@ -10,12 +10,12 @@ import java.time.LocalDate;
 public class ServiceProvider { // Fornecedor de servico
 
     private @Id @GeneratedValue(strategy = GenerationType.IDENTITY) Long  id;
-    private long cnpj;
+    private String cnpj;
     private String name;
     private LocalDate stipulatedPaymentDate;
 
 
-    public ServiceProvider(long cnpj, String name, Long id, LocalDate stipulatedPaymentDate) {
+    public ServiceProvider(String cnpj, String name, Long id, LocalDate stipulatedPaymentDate) {
         this.cnpj = cnpj;
         this.name = name;
         this.id = id;
@@ -25,11 +25,11 @@ public class ServiceProvider { // Fornecedor de servico
     public ServiceProvider() {
     } //empty constructor for tests.
 
-    public double getCnpj() {
+    public String getCnpj() {
         return cnpj;
     }
 
-    public void setCnpj(long cnpj) {
+    public void setCnpj(String cnpj) {
         this.cnpj = cnpj;
     }
 

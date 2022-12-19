@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.List;
 
 @Entity
 @Table(name = "tb_ServicesProviders")
@@ -14,7 +13,6 @@ public class ServiceProvider { // Fornecedor de servico
     private long cnpj;
     private String name;
     private LocalDate stipulatedPaymentDate;
-    private List<Invoice> invoices;
 
 
     public ServiceProvider(long cnpj, String name, Long id, LocalDate stipulatedPaymentDate) {
@@ -27,7 +25,7 @@ public class ServiceProvider { // Fornecedor de servico
     public ServiceProvider() {
     } //empty constructor for tests.
 
-    public long getCnpj() {
+    public double getCnpj() {
         return cnpj;
     }
 

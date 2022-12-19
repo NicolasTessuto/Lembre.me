@@ -3,7 +3,7 @@ package com.nicolastessuto.lembreme.entities;
 import com.nicolastessuto.lembreme.enums.PaymentMethod;
 
 import javax.persistence.*;
-import java.time.LocalDate;
+import java.sql.Date;
 
 @Entity
 @Table(name = "tb_Invoices")
@@ -12,37 +12,37 @@ public class Invoice { //Nota Fiscal
     private @Id @GeneratedValue(strategy = GenerationType.IDENTITY) Long id;
     @ManyToOne
     @JoinColumn(name = "serviceProviderId")
-    private ServiceProvider serviceProvider;
+    private ServiceProvider serviceProviderId;
 
     private int invoiceNumber;
-    private LocalDate issueDate;
-    private LocalDate dueDate;
+    private java.sql.Date issueDate;
+    private java.sql.Date dueDate;
     private Enum<PaymentMethod> paymentMethod;
 
     private float price;
     private boolean payed;
 
-    public ServiceProvider getServiceProvider() {
-        return serviceProvider;
+    public ServiceProvider getServiceProviderId() {
+        return serviceProviderId;
     }
 
-    public void setServiceProvider(ServiceProvider serviceProvider) {
-        this.serviceProvider = serviceProvider;
+    public void setServiceProviderId(ServiceProvider serviceProviderId) {
+        this.serviceProviderId = serviceProviderId;
     }
 
-    public LocalDate getIssueDate() {
+    public Date getIssueDate() {
         return issueDate;
     }
 
-    public void setIssueDate(LocalDate issueDate) {
+    public void setIssueDate(java.sql.Date issueDate) {
         this.issueDate = issueDate;
     }
 
-    public LocalDate getDueDate() {
+    public Date getDueDate() {
         return dueDate;
     }
 
-    public void setDueDate(LocalDate dueDate) {
+    public void setDueDate(java.sql.Date dueDate) {
         this.dueDate = dueDate;
     }
 
@@ -62,14 +62,14 @@ public class Invoice { //Nota Fiscal
         this.payed = payed;
     }
 
-    public Invoice(ServiceProvider invoiceNumber, LocalDate issueDate, LocalDate dueDate) {
-        this.serviceProvider = invoiceNumber;
+    public Invoice(ServiceProvider invoiceNumber, java.sql.Date issueDate, java.sql.Date dueDate) {
+        this.serviceProviderId = invoiceNumber;
         this.issueDate = issueDate;
         this.dueDate = dueDate;
     }
 
-    public Invoice(ServiceProvider invoiceNumber, LocalDate issueDate, LocalDate dueDate, Enum<PaymentMethod> formaDePagamento) {
-        this.serviceProvider = invoiceNumber;
+    public Invoice(ServiceProvider invoiceNumber, java.sql.Date issueDate, java.sql.Date dueDate, Enum<PaymentMethod> formaDePagamento) {
+        this.serviceProviderId = invoiceNumber;
         this.issueDate = issueDate;
         this.dueDate = dueDate;
         this.paymentMethod = formaDePagamento;
@@ -81,7 +81,7 @@ public class Invoice { //Nota Fiscal
     @Override
     public String toString() {
         return "NotaFiscal{" +
-                "numeroNf=" + serviceProvider +
+                "numeroNf=" + serviceProviderId +
                 ", emissao=" + issueDate +
                 ", vencimento=" + dueDate +
                 ", formaDePagamento=" + paymentMethod +

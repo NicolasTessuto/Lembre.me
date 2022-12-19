@@ -34,6 +34,19 @@ public class ServiceProviderController { //Controller fornecedores cadastrados
         return ResponseEntity.of(tempServiceProvider);
     }
 
+    @GetMapping(value = "/cnpj/{cnpj}")
+    public ResponseEntity<ServiceProvider> findByCnpj(@PathVariable Long cnpj){
+        Optional<ServiceProvider> tempServiceProvider = service.findServiceProviderByCnpj(cnpj);
+        return  ResponseEntity.of(tempServiceProvider);
+    }
+
+    @GetMapping(value = "/name/{name}")
+    public ResponseEntity<ServiceProvider> findByname(@PathVariable String name){
+        Optional<ServiceProvider> tempServiceProvider = service.findServiceProviderByName(name);
+        return ResponseEntity.of(tempServiceProvider);
+    }
+
+
     @PostMapping
     public ResponseEntity<ServiceProvider> addServiceProvider(@RequestBody ServiceProviderDTO serviceProviderDTO){
             ServiceProvider tempServiceProvider = service.addServiceProvider(serviceProviderDTO);

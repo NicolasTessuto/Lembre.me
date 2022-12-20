@@ -1,9 +1,8 @@
 package com.nicolastessuto.lembreme.entities;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Table(name = "tb_ServicesProviders")
@@ -13,7 +12,8 @@ public class ServiceProvider { // Fornecedor de servico
     private String cnpj;
     private String name;
     private LocalDate stipulatedPaymentDate;
-
+    @OneToMany
+    private List<Invoice> invoicesList;
 
     public ServiceProvider(String cnpj, String name, Long id, LocalDate stipulatedPaymentDate) {
         this.cnpj = cnpj;
@@ -57,4 +57,11 @@ public class ServiceProvider { // Fornecedor de servico
         this.stipulatedPaymentDate = stipulatedPaymentDate;
     }
 
+    public List<Invoice> getInvoicesList() {
+        return invoicesList;
+    }
+
+    public void setInvoicesList(List<Invoice> invoicesList) {
+        this.invoicesList = invoicesList;
+    }
 }

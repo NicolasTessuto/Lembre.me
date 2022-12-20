@@ -6,7 +6,6 @@ import com.nicolastessuto.lembreme.exceptions.ServiceProviderAlreadyExistsExcept
 import com.nicolastessuto.lembreme.repositories.ServiceProviderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.GetMapping;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -17,40 +16,39 @@ public class ServiceProviderService {
     @Autowired
     private ServiceProviderRepository repository;
 
-    public Optional<ServiceProvider> findServiceProviderById(Long id ){
+    public Optional<ServiceProvider> findServiceProviderById(Long id) {
         return repository.findById(id);
     }
 
-    public Optional<ServiceProvider> findServiceProviderByCnpj(String cnpj ){
+    public Optional<ServiceProvider> findServiceProviderByCnpj(String cnpj) {
         return repository.findByCnpj(cnpj);
     }
 
-    public Optional<ServiceProvider> findServiceProviderByName(String name){
+    public Optional<ServiceProvider> findServiceProviderByName(String name) {
         return repository.findByName(name);
     }
 
 
-    public List<ServiceProvider> findAllServiceProviders(){
+    public List<ServiceProvider> findAllServiceProviders() {
         return repository.findAll();
     }
 
 
-    public ServiceProvider addServiceProvider(ServiceProviderDTO serviceProviderDTO){
+    public ServiceProvider addServiceProvider(ServiceProviderDTO serviceProviderDTO) {
 
-        if(repository.findByCnpj(serviceProviderDTO.cnpj()).isPresent()) {
+        if (repository.findByCnpj(serviceProviderDTO.cnpj()).isPresent()) {
             throw new ServiceProviderAlreadyExistsException("Service Provider Already Exists");
-        }else{
+        } else {
 
-        LocalDate transitionStipulatePaymentDate = LocalDate.parse(serviceProviderDTO.stipulatedPaymentDate());
-        ServiceProvider serviceProvider = new ServiceProvider();
-        serviceProvider.setCnpj(serviceProviderDTO.cnpj());
-        serviceProvider.setName(serviceProviderDTO.name());
-        serviceProvider.setStipulatedPaymentDate(transitionStipulatePaymentDate);
+            LocalDate transitionStipulatePaymentDate = LocalDate.parse(serviceProviderDTO.stipulatedPaymentDate());
+            ServiceProvider serviceProvider = new ServiceProvider();
+            serviceProvider.setCnpj(serviceProviderDTO.cnpj());
+            serviceProvider.setName(serviceProviderDTO.name());
+            serviceProvider.setStipulatedPaymentDate(transitionStipulatePaymentDate);
 
-        return repository.save(serviceProvider);
+            return repository.save(serviceProvider);
         }
     }
-
 
 
 }

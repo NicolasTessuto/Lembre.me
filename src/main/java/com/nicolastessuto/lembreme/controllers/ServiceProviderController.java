@@ -9,9 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 @RestController
@@ -22,39 +20,38 @@ public class ServiceProviderController { //Controller fornecedores cadastrados
     private ServiceProviderService service;
     @Autowired
     private ServiceProviderRepository serviceProviderRepository;
-
     @GetMapping
-    public ResponseEntity<List<ServiceProvider>> findAll(){
+    public ResponseEntity<List<ServiceProvider>> findAll() {
         List<ServiceProvider> tempListServiceProviders = service.findAllServiceProviders();
         return ResponseEntity.status(200).body(tempListServiceProviders);
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<ServiceProvider> findById(@PathVariable long id){
+    public ResponseEntity<ServiceProvider> findById(@PathVariable long id) {
         Optional<ServiceProvider> tempServiceProvider = service.findServiceProviderById(id);
         return ResponseEntity.of(tempServiceProvider);
     }
 
     @GetMapping(value = "/cnpj/{cnpj}")
-    public ResponseEntity<ServiceProvider> findByCnpj(@PathVariable String cnpj){
+    public ResponseEntity<ServiceProvider> findByCnpj(@PathVariable String cnpj) {
         Optional<ServiceProvider> tempServiceProvider = service.findServiceProviderByCnpj(cnpj);
         return ResponseEntity.of(tempServiceProvider);
     }
 
     @GetMapping(value = "/name/{name}")
-    public ResponseEntity<ServiceProvider> findByName(@PathVariable String name){
+    public ResponseEntity<ServiceProvider> findByName(@PathVariable String name) {
         Optional<ServiceProvider> tempServiceProvider = service.findServiceProviderByName(name);
         return ResponseEntity.of(tempServiceProvider);
     }
 
     @PostMapping
-    public ResponseEntity<ServiceProvider> addServiceProvider(@RequestBody ServiceProviderDTO serviceProviderDTO){
-            ServiceProvider tempServiceProvider = service.addServiceProvider(serviceProviderDTO);
-            return ResponseEntity.status(200).body(tempServiceProvider);
+    public ResponseEntity<ServiceProvider> addServiceProvider(@RequestBody ServiceProviderDTO serviceProviderDTO) {
+        ServiceProvider tempServiceProvider = service.addServiceProvider(serviceProviderDTO);
+        return ResponseEntity.status(200).body(tempServiceProvider);
     }
 
     @ExceptionHandler
-    public ResponseEntity<Object> handleServiceProviderAreadyExists(ServiceProviderAlreadyExistsException e){
+    public ResponseEntity<Object> handleServiceProviderAreadyExists(ServiceProviderAlreadyExistsException e) {
         return ResponseEntity.status(422).body(e.getMessage());
     }
 

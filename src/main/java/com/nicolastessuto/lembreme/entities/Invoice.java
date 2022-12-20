@@ -11,23 +11,21 @@ public class Invoice { //Nota Fiscal
 
     private @Id @GeneratedValue(strategy = GenerationType.IDENTITY) Long id;
     @ManyToOne
-    @JoinColumn(name = "serviceProviderId")
-    private ServiceProvider serviceProviderId;
-
+    private ServiceProvider serviceProvider;
     private int invoiceNumber;
     private java.sql.Date issueDate;
     private java.sql.Date dueDate;
-    private Enum<PaymentMethod> paymentMethod;
-
+    @Enumerated(EnumType.STRING)
+    private PaymentMethod paymentMethod;
     private float price;
     private boolean payed;
 
-    public ServiceProvider getServiceProviderId() {
-        return serviceProviderId;
+    public ServiceProvider getServiceProvider() {
+        return serviceProvider;
     }
 
-    public void setServiceProviderId(ServiceProvider serviceProviderId) {
-        this.serviceProviderId = serviceProviderId;
+    public void setServiceProvider(ServiceProvider serviceProvider) {
+        this.serviceProvider = serviceProvider;
     }
 
     public Date getIssueDate() {
@@ -50,7 +48,7 @@ public class Invoice { //Nota Fiscal
         return paymentMethod;
     }
 
-    public void setPaymentMethod(Enum<PaymentMethod> formaDePagamento) {
+    public void setPaymentMethod(PaymentMethod formaDePagamento) {
         this.paymentMethod = formaDePagamento;
     }
 
@@ -63,13 +61,13 @@ public class Invoice { //Nota Fiscal
     }
 
     public Invoice(ServiceProvider invoiceNumber, java.sql.Date issueDate, java.sql.Date dueDate) {
-        this.serviceProviderId = invoiceNumber;
+        this.serviceProvider = invoiceNumber;
         this.issueDate = issueDate;
         this.dueDate = dueDate;
     }
 
-    public Invoice(ServiceProvider invoiceNumber, java.sql.Date issueDate, java.sql.Date dueDate, Enum<PaymentMethod> formaDePagamento) {
-        this.serviceProviderId = invoiceNumber;
+    public Invoice(ServiceProvider invoiceNumber, java.sql.Date issueDate, java.sql.Date dueDate, PaymentMethod formaDePagamento) {
+        this.serviceProvider = invoiceNumber;
         this.issueDate = issueDate;
         this.dueDate = dueDate;
         this.paymentMethod = formaDePagamento;
@@ -78,15 +76,6 @@ public class Invoice { //Nota Fiscal
     public Invoice() { //Construtor vazio para que nao seja preciso instanciar o objeto inteiro
     }
 
-    @Override
-    public String toString() {
-        return "NotaFiscal{" +
-                "numeroNf=" + serviceProviderId +
-                ", emissao=" + issueDate +
-                ", vencimento=" + dueDate +
-                ", formaDePagamento=" + paymentMethod +
-                ", paga=" + payed +
-                '}';
-    }
+
 
 }

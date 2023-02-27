@@ -8,7 +8,7 @@ import java.util.List;
 @Table(name = "tb_ServicesProviders")
 public class ServiceProvider { // Fornecedor de servico
 
-    private @Id @GeneratedValue(strategy = GenerationType.IDENTITY) Long  id;
+    private @Id @GeneratedValue(strategy = GenerationType.IDENTITY) Long id;
     private String cnpj;
     private String name;
     private LocalDate stipulatedPaymentDate;

@@ -1,6 +1,7 @@
 package com.nicolastessuto.lembreme.controllers;
 
 import com.nicolastessuto.lembreme.dto.ServiceProviderDTO;
+import com.nicolastessuto.lembreme.entities.Invoice;
 import com.nicolastessuto.lembreme.entities.ServiceProvider;
 import com.nicolastessuto.lembreme.exceptions.ServiceProviderAlreadyExistsException;
 import com.nicolastessuto.lembreme.repositories.ServiceProviderRepository;
@@ -24,6 +25,18 @@ public class ServiceProviderController { //Controller fornecedores cadastrados
     public ResponseEntity<List<ServiceProvider>> findAll() {
         List<ServiceProvider> tempListServiceProviders = service.findAllServiceProviders();
         return ResponseEntity.status(200).body(tempListServiceProviders);
+    }
+
+    @GetMapping(value = "/{cnpj}/invoices")
+    public ResponseEntity<List<Invoice>> findAllnfs(@PathVariable String cnpj){
+        Optional<ServiceProvider> tmpcnpj = service.findServiceProviderByCnpj(cnpj);
+        if (tmpcnpj.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+        else{
+            System.out.println(tmpcnpj.get().getInvoicesList());
+            return ResponseEntity.ok(tmpcnpj.get().getInvoicesList());
+        }
     }
 
     @GetMapping(value = "/{id}")

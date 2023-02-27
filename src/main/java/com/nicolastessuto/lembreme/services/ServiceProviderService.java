@@ -1,6 +1,7 @@
 package com.nicolastessuto.lembreme.services;
 
 import com.nicolastessuto.lembreme.dto.ServiceProviderDTO;
+import com.nicolastessuto.lembreme.entities.Invoice;
 import com.nicolastessuto.lembreme.entities.ServiceProvider;
 import com.nicolastessuto.lembreme.exceptions.ServiceProviderAlreadyExistsException;
 import com.nicolastessuto.lembreme.repositories.ServiceProviderRepository;

@@ -1,0 +1,7 @@
+package br.com.nts.lembreme.controller.request;
+
+public record LoginRequest(
+        String email,
+        String password
+) {
+}
